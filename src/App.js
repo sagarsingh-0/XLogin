@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 export default function App() {
@@ -10,16 +10,14 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!username || !password) {
-      alert("Please fill out both fields.");
-      return;
-    }
-
-    if (username === "user" && password === "password") {
-      setError("");
-      setIsSubmitted(true);
+      setError("Please fill out both fields."); // Set error message
+      setIsSubmitted(false); // Not submitted
+    } else if (username === "user" && password === "password") {
+      setError(""); // Clear error message
+      setIsSubmitted(true); // Submitted successfully
     } else {
-      setError("Invalid username or password");
-      setIsSubmitted(false);
+      setError("Invalid username or password"); // Set error message
+      setIsSubmitted(false); // Not submitted
     }
   };
 
@@ -34,7 +32,7 @@ export default function App() {
         <form onSubmit={handleSubmit}>
           {error && <p>{error}</p>}
           <div>
-            <label htmlFor="username">username:</label>
+            <label htmlFor="username">Username:</label>
             <input
               id="username"
               type="text"
